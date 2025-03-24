@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medical Diagnosis AI</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 flex items-center justify-center min-h-screen">
+
+    <div class="bg-white p-8 rounded-lg shadow-lg w-full max-w-lg">
+        <h1 class="text-3xl font-bold text-center text-blue-600">Medical Diagnosis AI</h1>
+        <p class="text-center text-gray-600 mt-2">Enter your symptoms to get a diagnosis</p>
+
+        <form method="POST" class="mt-6">
+            <label class="block mb-2 text-gray-700 font-medium">Enter Your Symptoms:</label>
+            <input type="text" name="question" value="{{ question }}" 
+                   class="w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-400 outline-none" required
+                   placeholder="e.g. Headache, Fever, Stomach Pain">
+            
+            <button type="submit" class="w-full bg-blue-600 text-white py-3 px-4 mt-4 rounded-md hover:bg-blue-700 transition font-semibold">
+                Get Diagnosis
+            </button>
+        </form>
+
+        {% if diagnosis %}
+        <div class="mt-6 p-4 bg-green-50 border-l-4 border-green-500">
+            <h2 class="text-lg font-bold text-green-700">Diagnosis Result</h2>
+            <p class="text-gray-700 mt-2"><strong>Possible Conditions:</strong></p>
+            
+            <!-- Properly formatted diagnosis response -->
+            <div class="bg-white p-4 rounded-md shadow-md mt-3 border border-gray-200">
+                {% if "A." in diagnosis or "B." in diagnosis %}
+                    <p class="font-semibold text-gray-800">{{ diagnosis | replace("\n", "<br>") | safe }}</p>
+                {% else %}
+                    <ul class="list-disc pl-5 mt-2 text-gray-700">
+                        {% for condition in diagnosis.split(", ") %}
+                            <li class="font-medium">{{ condition }}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+            </div>
+        </div>
+        {% endif %}
+    </div>
+
+</body>
+</html>
