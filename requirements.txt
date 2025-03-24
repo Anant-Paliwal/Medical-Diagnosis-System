@@ -2,6 +2,6 @@ streamlit
 tensorflow
 pillow
 scikit-learn
-traceback
+
 gunicorn
 flask
