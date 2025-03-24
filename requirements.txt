@@ -1,6 +1,7 @@
 streamlit
 tensorflow
-PIL
+pillow
 sklearn
 traceback
 gunicorn
+flask
